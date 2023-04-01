@@ -83,7 +83,7 @@ class fofa_search():
     def get_res(self, page):
         try:
             url = self.url.format(base64.b64encode(self.search_text.encode()).decode(), page + 1)
-            req = requests.get(url=url, headers=self.headers, timeout=20, verify=False, proxies={"https":"127.0.0.1:8080"})
+            req = requests.get(url=url, headers=self.headers, timeout=20, verify=False)
             content = req.text
             targets_http = []
             # 采集所有
@@ -167,7 +167,7 @@ if __name__ == '__main__':
                        help='output result to FILE')
 
     parse.epilog = 'Examples:\n\t' \
-                    'python fofa_search.py -q \'banner="laravel_session" && country="US"\' -p 30 -f full -o res.txt\t\n\t'
+                    'python fofa_search.py -q \'banner="laravel_session" && country="US"\' -p 30 -f all -o res.txt\t\n\t'
 
     search = parse.parse_args().query
     page = parse.parse_args().page
